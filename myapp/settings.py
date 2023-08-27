@@ -136,9 +136,15 @@ print(output)
 # Where collectstatic will copy static files for deployment
 BASE_DIR = Path(__file__).resolve().parent.parent
 print('BASE_DIR', BASE_DIR)
+
+output = subprocess.check_output(['ls', 'BASE_DIR']).decode('utf-8')
+print('BASE_DIR ls', output)
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 print('STATIC_ROOT', STATIC_ROOT)
 
+output = subprocess.check_output(['ls', 'STATIC_ROOT']).decode('utf-8')
+print('STATIC_ROOT ls', output)
 
 # settings.py
 
