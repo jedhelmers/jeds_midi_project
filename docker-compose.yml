@@ -15,6 +15,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - frontend
   db:
     image: postgres:13
     environment:
