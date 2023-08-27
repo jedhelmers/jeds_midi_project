@@ -127,6 +127,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+import subprocess
+
+output = subprocess.check_output(['ls']).decode('utf-8')
+print(output)
+
 # STATIC_URL = 'static/'
 # Where collectstatic will copy static files for deployment
 BASE_DIR = Path(__file__).resolve().parent.parent
