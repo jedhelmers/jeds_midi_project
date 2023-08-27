@@ -137,8 +137,9 @@ print('STATIC_ROOT', STATIC_ROOT)
 # settings.py
 
 STATIC_URL = '/static/'
+print('STATIC_URL', STATIC_URL)
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "frontend/build/static")]
-
+print('STATICFILES_DIRS', STATICFILES_DIRS)
 
 # URL to use when referring to static files in templates, etc.
 # STATIC_URL = '/static/'
