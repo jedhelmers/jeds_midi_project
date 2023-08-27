@@ -137,13 +137,13 @@ print(output)
 BASE_DIR = Path(__file__).resolve().parent.parent
 print('BASE_DIR', BASE_DIR)
 
-output = subprocess.check_output(['ls BASE_DIR']).decode('utf-8')
+output = subprocess.check_output([f'ls {BASE_DIR}']).decode('utf-8')
 print('BASE_DIR ls', output)
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 print('STATIC_ROOT', STATIC_ROOT)
 
-output = subprocess.check_output(['ls STATIC_ROOT']).decode('utf-8')
+output = subprocess.check_output([f'ls {STATIC_ROOT}']).decode('utf-8')
 print('STATIC_ROOT ls', output)
 
 # settings.py
