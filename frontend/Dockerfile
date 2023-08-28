@@ -13,6 +13,8 @@ RUN ls -la
 # Install any needed packages using npm
 RUN npm install
 
+RUN npm run build
+
 # Copy the rest of the application code
 COPY . .
 RUN ECHO 3
