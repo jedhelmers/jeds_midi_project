@@ -2,20 +2,16 @@
 FROM node:14
 
 # Set the working directory in the container to /app
-WORKDIR /app
-RUN ls -la
+WORKDIR /app/frontend
 
 # Copy the current directory contents into the container at /app
 COPY package*.json ./
-RUN ls -la
+
 # Install any needed packages using npm
 RUN npm install
 
 # Copy the rest of the application code
 COPY . .
-RUN npm run build
-
-RUN ls -la
 
 # Make port 3000 available to the world outside this container (if you use React's dev server)
 EXPOSE 3000
