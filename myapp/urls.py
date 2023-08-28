@@ -27,6 +27,7 @@ import myapp.views as views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.CustomTemplateView.as_view(), name='home'),
+    path('save_sequence/', views.save_sequence, name='save_sequence'),
     re_path(r'^static/(?P<path>.*)$', serve),
 ]
 

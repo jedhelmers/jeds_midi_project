@@ -2,14 +2,33 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic import TemplateView
-# from rest_framework.decorators import api_view
-# from .models import Note
-# from .models import Song
-# from .tasks import save_song_to_db
-
-import json
-# from .serializers import SongSerializer, MidiUpdateSerializer
 import uuid
+import json
+
+from .models import Sequence
+
+
+@csrf_exempt
+def save_sequence(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            print('data', data)
+            user_id = data['user_id']
+            print('user_id', user_id)
+            sequence_matrix = data['sequence_matrix']
+            print('sequence_matrix', sequence_matrix)
+
+            # Creating a new Sequence instance and saving it
+            sequence = Sequence(user_id=user_id, sequence_matrix=sequence_matrix)
+            sequence.save()
+
+            return JsonResponse({'message': 'Sequence saved successfully!'}, status=200)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    else:
+        return JsonResponse({'error': 'Only POST method is supported'}, status=405)
+
 
 class CustomTemplateView(TemplateView):
     template_name = "index.html"

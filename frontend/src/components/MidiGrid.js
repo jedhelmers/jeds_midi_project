@@ -10,7 +10,7 @@ function intToNoteName(intValue) {
     // The notes in an octave.
     const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-    // Get the note name by taking the modulo of the integer value with 12. 
+    // Get the note name by taking the modulo of the integer value with 12.
     // This will give the remainder, which corresponds to a note in the 'notes' array.
     return notes[intValue % 12] + octave;
 }
@@ -53,46 +53,66 @@ function MidiGrid() {
 
     console.log(userId)
     const csrftoken = getCookie('csrftoken')
-    
-    // const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    
+
     useEffect(() => {
       setUserId(getCookie('user_id'))
     }, [])
 
     async function saveSong() {
-        console.log('grid', grid)
-        try {
-            console.log(
-              JSON.stringify(
-                {
-                  song_data: grid,
-                  user_id: userId
-                })
-            )
-            const response = await fetch('/api/saveSong', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrftoken
-                },
-                body: JSON.stringify(
-                  {
-                    song_data: grid,
-                    user_id: userId
-                  })
-            });
+        // console.log('grid', grid)
+        // try {
+        //     console.log(
+        //       JSON.stringify(
+        //         {
+        //           song_data: grid,
+        //           user_id: userId
+        //         })
+        //     )
+        //     const response = await fetch('/api/saveSong', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'X-CSRFToken': csrftoken
+        //         },
+        //         body: JSON.stringify(
+        //           {
+        //             song_data: grid,
+        //             user_id: userId
+        //           })
+        //     });
 
-            const data = await response.json();
+        //     const data = await response.json();
 
-            if (data.status === 'success') {
-                console.log(`Song saved with ID: ${data.song_id}`);
-            } else {
-                console.error('Oh butts.', data.error);
-            }
-        } catch (error) {
-            console.error('Failed to save song:', error);
-        }
+        //     if (data.status === 'success') {
+        //         console.log(`Song saved with ID: ${data.song_id}`);
+        //     } else {
+        //         console.error('Oh butts.', data.error);
+        //     }
+        // } catch (error) {
+        //     console.error('Failed to save song:', error);
+        // }
+        console.log('userId', userId)
+        const payload = {
+          user_id: userId,
+          sequence_matrix: grid, // Just an example. This should match whatever you're expecting.
+        };
+        console.log('payload', payload)
+
+        fetch('/save_sequence/', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': csrftoken
+          },
+          body: JSON.stringify(payload),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data); // Handle the response, maybe show a success message.
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
 
     function playNote(note) {
@@ -122,7 +142,7 @@ function MidiGrid() {
     return () => clearInterval(interval);
   }, []);
 
-  
+
   return (
     <div className="grid-container">
         <button onClick={saveSong}>Save</button>
@@ -131,9 +151,9 @@ function MidiGrid() {
         {grid.map((row, rowIndex) => (
             <div key={rowIndex} className="row">
             {row.map((cell, colIndex) => (
-                <div 
-                key={colIndex} 
-                className={`cell ${colIndex === playhead ? 'active' : ''} ${cell ? 'on' : ''}`} 
+                <div
+                key={colIndex}
+                className={`cell ${colIndex === playhead ? 'active' : ''} ${cell ? 'on' : ''}`}
                 onClick={() => toggleCell(rowIndex, colIndex)}
                 ></div>
             ))}
@@ -153,15 +173,15 @@ function MidiGrid() {
     function toggleCell(row, col) {
         // Clone the current grid state
         const newGrid = grid.slice();
-      
+
         // Toggle the cell's state
         newGrid[row][col] = +!newGrid[row][col];
-      
+
         // If the cell is now 'on', play the corresponding note
         if (newGrid[row][col]) {
           playNote(row + 48); // Assuming the grid starts at MIDI note number 24 (C1) and increases by 1 for each row
         }
-      
+
         // Update the grid state
         setGrid(newGrid);
       }

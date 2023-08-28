@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'myapp',
 ]
 
 MIDDLEWARE = [
@@ -151,7 +152,7 @@ print('STATIC_ROOT', STATIC_ROOT)
 
 STATIC_URL = '/static/'
 print('STATIC_URL', STATIC_URL)
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "frontend/build/static")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "frontend/")]
 print('STATICFILES_DIRS', STATICFILES_DIRS)
 
 # URL to use when referring to static files in templates, etc.
