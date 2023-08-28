@@ -13,12 +13,13 @@ RUN ls -la
 # Install any needed packages using npm
 RUN npm install
 
-RUN npm run build
-
 # Copy the rest of the application code
 COPY . .
+RUN npm run build
+
 RUN ECHO 3
 RUN ls -la
+
 # Make port 3000 available to the world outside this container (if you use React's dev server)
 EXPOSE 3000
 
