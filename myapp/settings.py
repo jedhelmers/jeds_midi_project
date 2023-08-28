@@ -62,7 +62,7 @@ ROOT_URLCONF = 'myapp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'frontend/build')],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend/public')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -150,7 +150,7 @@ print('STATIC_ROOT', STATIC_ROOT)
 
 STATIC_URL = '/static/'
 print('STATIC_URL', STATIC_URL)
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "frontend/build/static")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "frontend/public/static")]
 print('STATICFILES_DIRS', STATICFILES_DIRS)
 
 # URL to use when referring to static files in templates, etc.
@@ -158,7 +158,7 @@ print('STATICFILES_DIRS', STATICFILES_DIRS)
 
 # # Additional locations of static files
 # STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'frontend/build'),  # React static files
+#     os.path.join(BASE_DIR, 'frontend/public'),  # React static files
 # ]
 
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, "frontend", "build", 'static'),]
