@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 import uuid
 import json
 
-from .models import Sequence
+from .models import SequenceMatrix
 
 
 @csrf_exempt
@@ -20,7 +20,7 @@ def save_sequence(request):
             print('sequence_matrix', sequence_matrix)
 
             # Creating a new Sequence instance and saving it
-            sequence = Sequence(user_id=user_id, sequence_matrix=sequence_matrix)
+            sequence = SequenceMatrix(user_id=user_id, sequence_matrix=sequence_matrix)
             sequence.save()
 
             return JsonResponse({'message': 'Sequence saved successfully!'}, status=200)
