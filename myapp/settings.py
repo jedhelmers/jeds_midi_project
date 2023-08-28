@@ -135,6 +135,7 @@ print(output)
 # STATIC_URL = 'static/'
 # Where collectstatic will copy static files for deployment
 BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = '/app'
 print('BASE_DIR', BASE_DIR)
 
 # output = subprocess.check_output([f'ls {BASE_DIR}']).decode('utf-8')
