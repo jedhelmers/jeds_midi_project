@@ -13,7 +13,7 @@ def save_sequence(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            print('data', data)
+            # print('data', data)
             user_id = data['user_id']
             print('user_id', user_id)
             sequence_matrix = data['sequence_matrix']
@@ -21,6 +21,8 @@ def save_sequence(request):
 
             # Creating a new Sequence instance and saving it
             sequence = SequenceMatrix(user_id=user_id, sequence_matrix=sequence_matrix)
+            print('id', sequence.id)
+            print('date_created', sequence.date_created)
             sequence.save()
 
             return JsonResponse({'message': 'Sequence saved successfully!'}, status=200)
